@@ -2,7 +2,6 @@ import { mapGameNameToDisplay } from "@site/src/data/mapping"
 import styles from "./base.module.css"
 
 export default function({ games }) {
-    console.log(games)
     return (<table>
         <thead>
             <tr>

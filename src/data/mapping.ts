@@ -128,4 +128,3 @@ export function getBracketImage(bracket: string) {
 }
 
 export const tournamentMaps = Object.values(GameNameMappingToDisplayName);
-console.log({ GameNameMappingToDisplayName, tournamentMaps })
