@@ -62,7 +62,7 @@ export default function Base(): JSX.Element {
             <p>Who is the fastest player in the tournament? We can see the eAPM over all brackets</p>
             <ApmChart gamesData={gamesData.filter(game => game.map != null)} filter={filter}></ApmChart>
             <hr></hr>
-            Thanks for checking out T90 Titans League 5 Bronze in Stats!
+            Thanks for checking out T90 Sudden Death Cup in Stats!
         </Fragment >
     );
 }

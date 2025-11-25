@@ -1,5 +1,5 @@
 ---
-title: T90 Titans League 5 Bronze in Stats
+title: T90 Sudden Death Cup in Stats
 ---
 
 import Players from '../components/charts/players.tsx'
