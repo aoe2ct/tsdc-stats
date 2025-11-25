@@ -1,7 +1,7 @@
 import useDelayedColorMode from "@site/src/utils/use-delayed-color-mode";
 import Chart from "./chart";
 import { Filter } from "../filter/filter-dialog";
-import { GameNameMappingToDisplayName } from "@site/src/data/mapping";
+import { mapGameNameToDisplay } from "@site/src/data/mapping";
 
 export default function GameTimeChart({ gamesData, filter }: { gamesData: any[], filter: Filter }): JSX.Element {
     useDelayedColorMode();
@@ -74,7 +74,7 @@ export default function GameTimeChart({ gamesData, filter }: { gamesData: any[],
                     generateLabels: () => {
                         if (filter == null) return [];
                         return [
-                            { text: `Maps: ${filter.appliedFilters.maps ? filter.maps.map(gameName => GameNameMappingToDisplayName[gameName]).join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800') },
+                            { text: `Maps: ${filter.appliedFilters.maps ? filter.maps.map(gameName => mapGameNameToDisplay(gameName)).join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800') },
                             { text: `Brackets: ${filter.appliedFilters.brackets ? filter.brackets.join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800') },
                             { text: `Stages: ${filter.appliedFilters.stages ? filter.stages.join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800') },
                         ];

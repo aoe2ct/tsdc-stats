@@ -1,5 +1,5 @@
 import Chart from "./chart";
-import { GameNameMappingToDisplayName, mapDraftNameToGameNameMapping } from "@site/src/data/mapping";
+import { mapDraftNameToDisplay, tournamentMaps } from "@site/src/data/mapping";
 import MapChartConfig from "@site/src/utils/map-chart-config";
 import useDelayedColorMode from "@site/src/utils/use-delayed-color-mode";
 import { merge } from 'lodash-es';
@@ -12,7 +12,7 @@ export default function MapPickChart({ draftsData, filter }: { draftsData: { map
         (acc, draft) => {
             const mapPicks = draft.draft.filter(v => v.action === 'pick');
             for (const pick of mapPicks) {
-                const mapName = pick.map;
+                const mapName = mapDraftNameToDisplay(pick.map);
                 if (!acc.hasOwnProperty(mapName)) {
                     acc[mapName] = { "player": 0, "admin": 0 };
                 }
@@ -20,7 +20,7 @@ export default function MapPickChart({ draftsData, filter }: { draftsData: { map
             }
             return acc;
         },
-        Object.fromEntries(Object.keys(mapDraftNameToGameNameMapping).map(map_name => [map_name, { admin: 0, player: 0 }])),
+        Object.fromEntries(tournamentMaps.map(map_name => [map_name, { admin: 0, player: 0 }])),
     );
     const player_data = [];
     const admin_data = [];
@@ -28,7 +28,7 @@ export default function MapPickChart({ draftsData, filter }: { draftsData: { map
     for (const [key, value] of Object.entries(draftPickData).sort(([k, a], [ka, b]) => b.admin + b.player - a.admin - a.player)) {
         player_data.push(value.player);
         admin_data.push(value.admin);
-        keys.push(GameNameMappingToDisplayName[mapDraftNameToGameNameMapping[key]]);
+        keys.push(key);
     }
 
     const style = getComputedStyle(document.body);

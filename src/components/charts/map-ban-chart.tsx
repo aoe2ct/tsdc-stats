@@ -1,5 +1,5 @@
 import Chart from "./chart";
-import { GameNameMappingToDisplayName, mapDraftNameToGameNameMapping } from "@site/src/data/mapping";
+import { mapDraftNameToDisplay, tournamentMaps } from "@site/src/data/mapping";
 import MapChartConfig from "@site/src/utils/map-chart-config";
 import useDelayedColorMode from "@site/src/utils/use-delayed-color-mode";
 import { merge } from 'lodash-es';
@@ -12,7 +12,7 @@ export default function MapBanChart({ draftsData, filter }: { draftsData: { mapD
         (acc, draft) => {
             const mapPicks = draft.draft.filter(v => v.action === 'ban');
             for (const pick of mapPicks) {
-                const mapName = pick.map;
+                const mapName = mapDraftNameToDisplay(pick.map);
                 if (!acc.hasOwnProperty(mapName)) {
                     acc[mapName] = 0;
                 }
@@ -20,13 +20,13 @@ export default function MapBanChart({ draftsData, filter }: { draftsData: { mapD
             }
             return acc;
         },
-        Object.fromEntries(Object.keys(mapDraftNameToGameNameMapping).map(map_name => [map_name, 0])),
+        Object.fromEntries(tournamentMaps.map(map_name => [map_name, 0])),
     );
     const player_data = [];
     const keys = [];
     for (const [key, value] of Object.entries(draftPickData).sort(([_ka, a], [_kb, b]) => b - a)) {
         player_data.push(value);
-        keys.push(GameNameMappingToDisplayName[mapDraftNameToGameNameMapping[key]]);
+        keys.push(key);
     }
 
     const style = getComputedStyle(document.body);

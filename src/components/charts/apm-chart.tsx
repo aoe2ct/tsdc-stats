@@ -1,23 +1,12 @@
 import { Scatter } from "react-chartjs-2";
 import { Chart, PointElement } from 'chart.js'
 import useDelayedColorMode from "@site/src/utils/use-delayed-color-mode";
-import { BracketNameToImage } from "@site/src/data/mapping";
+import { BracketNameToImage, bracketColors } from "@site/src/data/mapping";
 
 Chart.register(PointElement);
 
 type Bracket = keyof typeof BracketNameToImage
 const bracketOrder = Object.keys(BracketNameToImage) as Bracket[];
-const bracketColors: { [bracket in Bracket]: string } = {
-    "Group A": "#1f77b4",
-    "Group B": "#ff7f0e",
-    "Group C": "#2ca02c",
-    "Group D": "#d62728",
-    "Group E": "#9467bd",
-    "Group F": "#8c564b",
-    "Group G": "#e377c2",
-    "Group H": "#7f7f7f",
-    "Other": "#bcbd22",
-};
 
 export default function ApmChart({ gamesData }: { gamesData: any[] }): JSX.Element {
     useDelayedColorMode();

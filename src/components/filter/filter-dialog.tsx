@@ -5,7 +5,7 @@ import { pull, uniq, merge, cloneDeep } from 'lodash-es';
 import FilterBracketItem from './filter-bracket-item';
 import FilterStageItem from './filter-stage-item';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import { BracketNameToImage, GameNameMappingToDisplayName } from '@site/src/data/mapping';
+import { BracketNameToImage, GameNameMappingToDisplayName, getBracketImage, loserStages, winnerStages } from '@site/src/data/mapping';
 
 export type Filter = {
     maps: string[],
@@ -18,9 +18,6 @@ export type Filter = {
         maps: boolean,
     },
 };
-
-const winnerStages: string[] = ['Round 1', 'Round 2', 'Semifinals', 'Finals'];
-const loserStages: string[] = ['Silver Replacement'];
 
 export default function FilterDialog(): JSX.Element {
     const onClickHandler = (isApplied) => {
@@ -89,13 +86,13 @@ export default function FilterDialog(): JSX.Element {
             <hr />
             <h2>Brackets</h2>
             <div className={styles['map-container']}>
-                {Object.entries(BracketNameToImage).map(([bracketName, bracketImage]) =>
+                {Object.keys(BracketNameToImage).map((bracket) =>
                     <FilterBracketItem
-                        key={bracketName}
-                        imageSrc={bracketImage ? useBaseUrl(bracketImage) : undefined}
-                        value={filter.brackets.includes(bracketName)}
-                        onChange={onBracketFilterChange.bind(this, bracketName)}
-                        name={bracketName} />
+                        key={bracket}
+                        imageSrc={getBracketImage(bracket)}
+                        value={filter.brackets.includes(bracket)}
+                        onChange={onBracketFilterChange.bind(this, bracket)}
+                        name={bracket} />
                 )
                 }
             </div>

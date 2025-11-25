@@ -1,5 +1,5 @@
 import Chart from "./chart";
-import { GameNameMappingToDisplayName, acceptableMisnamedMaps, mapDraftNameToGameNameMapping } from "@site/src/data/mapping";
+import { mapGameNameToDisplay, tournamentMaps } from "@site/src/data/mapping";
 import MapChartConfig from "@site/src/utils/map-chart-config";
 import useDelayedColorMode from "@site/src/utils/use-delayed-color-mode";
 import { merge } from 'lodash-es';
@@ -10,10 +10,7 @@ export default function MapPlayChart({ gamesData, filter }: { gamesData: any[], 
     useDelayedColorMode();
     const mapData: { [key: string]: number } = gamesData.reduce(
         (acc, game) => {
-            const mapName: string = acceptableMisnamedMaps[game.map] ?? game.map;
-            if (!GameNameMappingToDisplayName[mapName]) {
-                console.log("Unknown Map:", mapName);
-            }
+            const mapName = mapGameNameToDisplay(game.map);
             if (acc.hasOwnProperty(mapName)) {
                 acc[mapName] = acc[mapName] + 1;
             } else {
@@ -21,13 +18,13 @@ export default function MapPlayChart({ gamesData, filter }: { gamesData: any[], 
             }
             return acc;
         },
-        Object.fromEntries(Object.keys(GameNameMappingToDisplayName).map(map_name => [map_name, 0])),
+        Object.fromEntries(tournamentMaps.map(map_name => [map_name, 0])),
     );
     const data = [];
     const keys = [];
     for (const [key, value] of Object.entries(mapData).sort(([k, a], [ka, b]) => b - a)) {
         data.push(value);
-        keys.push(GameNameMappingToDisplayName[key]);
+        keys.push(key);
     }
 
     const style = getComputedStyle(document.body);

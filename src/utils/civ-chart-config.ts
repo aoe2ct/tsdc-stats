@@ -1,5 +1,5 @@
 import { Filter } from "../components/filter/filter-dialog";
-import { GameNameMappingToDisplayName } from "../data/mapping";
+import { mapGameNameToDisplay } from "../data/mapping";
 
 const CivChartConfig = (style, data) => ({
     scales: {
@@ -38,14 +38,14 @@ const _FilterLegendConfig = (style, filter: Filter, showMapsFilter: boolean) => 
                         if (filter == null) return [];
                         if (showMapsFilter) {
                             return [
-                                {text: `Maps: ${filter.appliedFilters.maps ? filter.maps.map(gameName => GameNameMappingToDisplayName[gameName]).join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800')},
-                                {text: `Brackets: ${filter.appliedFilters.brackets ? filter.brackets.join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800')},
-                                {text: `Stages: ${filter.appliedFilters.stages ? filter.stages.join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800')},
+                                { text: `Maps: ${filter.appliedFilters.maps ? filter.maps.map(mapGameNameToDisplay).join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800') },
+                                { text: `Brackets: ${filter.appliedFilters.brackets ? filter.brackets.join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800') },
+                                { text: `Stages: ${filter.appliedFilters.stages ? filter.stages.join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800') },
                             ];
                         }
                         return [
-                            {text: `Brackets: ${filter.appliedFilters.brackets ? filter.brackets.join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800')},
-                            {text: `Stages: ${filter.appliedFilters.stages ? filter.stages.join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800')},
+                            { text: `Brackets: ${filter.appliedFilters.brackets ? filter.brackets.join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800') },
+                            { text: `Stages: ${filter.appliedFilters.stages ? filter.stages.join(', ') : 'All'}`, fontColor: style.getPropertyValue('--ifm-color-emphasis-800') },
                         ];
                     },
                 },

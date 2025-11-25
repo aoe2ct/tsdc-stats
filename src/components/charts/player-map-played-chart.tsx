@@ -1,5 +1,5 @@
 import Chart from "./chart";
-import { GameNameMappingToDisplayName, mapDraftNameToGameNameMapping } from "@site/src/data/mapping";
+import { tournamentMaps } from "@site/src/data/mapping";
 import MapChartConfig from "@site/src/utils/map-chart-config";
 import useDelayedColorMode from "@site/src/utils/use-delayed-color-mode";
 import { merge } from 'lodash-es';
@@ -8,7 +8,7 @@ import { FilterLegendConfig } from "@site/src/utils/civ-chart-config";
 
 export default function PlayerMapPlayedChart({ winCounts, lossCounts, filter }: { winCounts: Record<string, number>, lossCounts: Record<string, number>, filter: Filter }): JSX.Element {
     useDelayedColorMode();
-    const playData = Object.fromEntries(Object.values(GameNameMappingToDisplayName).map(map_name => [map_name, { win: winCounts[map_name] ?? 0, loss: lossCounts[map_name] ?? 0 }]));
+    const playData = Object.fromEntries(tournamentMaps.map(map_name => [map_name, { win: winCounts[map_name] ?? 0, loss: lossCounts[map_name] ?? 0 }]));
     const win_data = [];
     const loss_data = [];
     const keys = [];
