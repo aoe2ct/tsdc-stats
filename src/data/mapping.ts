@@ -8,6 +8,7 @@ export const mapDraftNameToGameNameMapping: Record<string, string> = {
     "Border Dispute": "TSDC Border Dispute",
     "Brood War": "TSDC Brood War",
     "Eredo-Iya": "TSDC Eredo-Iya",
+    "Eredo-lya": "TSDC Eredo-Iya",
     "Hamburger": "TSDC Hamburger",
     "Kirby's world": "TSDC Kirby's World",
     "Lagoon": "TSDC Lagoon",
