@@ -85,7 +85,7 @@ export default function CivWinChart({ draftsData, gamesData, filter }: { draftsD
                 enables: true,
                 callbacks: {
                     label: ({ dataIndex }) => {
-                        return `${(data[dataIndex] * 100).toPrecision(4)}% WR ${(playRate[dataIndex] * 100).toPrecision(4)}% play rate (${gamesPlayed[dataIndex]}/${drafted[dataIndex]} played/picked)`;
+                        return `${(data[dataIndex] * 100).toPrecision(4)}% Win Rate (${gamesPlayed[dataIndex]}/${drafted[dataIndex]} played/picked)`;
                     },
                 },
             },
@@ -105,7 +105,7 @@ export default function CivWinChart({ draftsData, gamesData, filter }: { draftsD
             data: data,
             backgroundColor: data.map((_v, i) => i % 2 === 0 ? style.getPropertyValue('--ifm-color-primary') : style.getPropertyValue('--ifm-color-secondary')),
         }, {
-            data: playRate,
+            data: data,
             backgroundColor: data.map((_v, i) => i % 2 === 0 ? style.getPropertyValue('--ifm-color-primary-lightest') : style.getPropertyValue('--ifm-color-secondary-lightest')),
             borderWidth: 1,
             type: 'line'
