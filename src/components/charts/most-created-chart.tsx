@@ -8,25 +8,26 @@ Chart.register(PointElement);
 type Bracket = keyof typeof BracketNameToImage
 const bracketOrder = Object.keys(BracketNameToImage) as Bracket[];
 
-export default function VilCountChart({ gamesData }: { gamesData: any[] }): JSX.Element {
+export default function MostCreatedChart({ gamesData }: { gamesData: any[] }): JSX.Element {
     useDelayedColorMode();
-    let bracketVilCount: Map<Bracket, Array<{ count: number, player: string }>> = new Map();
+    let bracketMostCreated: Map<Bracket, Array<{ count: number, name: string, player: string }>> = new Map();
     gamesData.forEach(game => {
-        if (!bracketVilCount.has(game.bracket)) {
-            bracketVilCount.set(game.bracket, []);
+        if (!bracketMostCreated.has(game.bracket)) {
+            bracketMostCreated.set(game.bracket, []);
         }
-        bracketVilCount.set(game.bracket, [
-            ...bracketVilCount.get(game.bracket),
-            { count: game.vil_count[0], player: game.players[0] },
-            { count: game.vil_count[1], player: game.players[1] }
+        bracketMostCreated.set(game.bracket, [
+            ...bracketMostCreated.get(game.bracket),
+            { count: game.most_created_count[0], name: game.most_created[0], player: game.players[0] },
+            { count: game.most_created_count[1], name: game.most_created[1], player: game.players[1] }
         ]);
     });
     const datasets = bracketOrder.map((bracket, index) => ({
         label: bracket,
-        data: (bracketVilCount.get(bracket) ?? []).map(vilCount => ({
+        data: (bracketMostCreated.get(bracket) ?? []).map(mostCreated => ({
             x: Math.random() * 0.4 + 0.4,
-            y: vilCount.count,
-            player: vilCount.player
+            y: mostCreated.count,
+            name: mostCreated.name,
+            player: mostCreated.player
         })),
         xAxisID: `x${index == 0 ? '' : index}`,
         backgroundColor: bracketColors[bracket],
@@ -64,7 +65,7 @@ export default function VilCountChart({ gamesData }: { gamesData: any[] }): JSX.
         plugins: {
             title: {
                 display: true,
-                text: 'Vil counts by bracket',
+                text: 'Most created unit by bracket',
             },
             legend: {
                 display: false,
@@ -73,7 +74,7 @@ export default function VilCountChart({ gamesData }: { gamesData: any[] }): JSX.
                 enables: true,
                 callbacks: {
                     label: ({ parsed, raw }) => {
-                        return `${raw.player}: ${parsed.y}`;
+                        return `${raw.name}: ${parsed.y} - ${raw.player}`;
                     },
                 },
             },

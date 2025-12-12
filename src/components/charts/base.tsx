@@ -14,6 +14,7 @@ import MapPlayChart from './map-play-chart';
 import ApmChart from './apm-chart';
 import { acceptableMisnamedMaps } from '@site/src/data/mapping';
 import VilCountChart from './vil-count-chart';
+import MostCreatedChart from './most-created-chart';
 
 export default function Base(): JSX.Element {
     const [filter, setFilter] = useState(null);
@@ -64,6 +65,8 @@ export default function Base(): JSX.Element {
             <ApmChart gamesData={gamesData.filter(game => game.map != null)}></ApmChart>
             <p>And who queued the most villagers in each game? Let's see!</p>
             <VilCountChart gamesData={gamesData.filter(game => game.map != null)}></VilCountChart>
+            <p>What were the most created units in each game by each player?</p>
+            <MostCreatedChart gamesData={gamesData.filter(game => game.map != null)}></MostCreatedChart>
             <hr></hr>
             Thanks for checking out T90 Sudden Death Cup in Stats!
         </Fragment >
