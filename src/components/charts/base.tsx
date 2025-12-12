@@ -13,6 +13,7 @@ import GameTimeChart from './game-time-chart';
 import MapPlayChart from './map-play-chart';
 import ApmChart from './apm-chart';
 import { acceptableMisnamedMaps } from '@site/src/data/mapping';
+import VilCountChart from './vil-count-chart';
 
 export default function Base(): JSX.Element {
     const [filter, setFilter] = useState(null);
@@ -60,7 +61,9 @@ export default function Base(): JSX.Element {
             <p>How long each game was? Let's see on the next graph!</p>
             <GameTimeChart gamesData={filteredGamesData.filter(game => game.map != null)} filter={filter}></GameTimeChart>
             <p>Who is the fastest player in the tournament? We can see the eAPM over all brackets</p>
-            <ApmChart gamesData={gamesData.filter(game => game.map != null)} filter={filter}></ApmChart>
+            <ApmChart gamesData={gamesData.filter(game => game.map != null)}></ApmChart>
+            <p>And who queued the most villagers in each game? Let's see!</p>
+            <VilCountChart gamesData={gamesData.filter(game => game.map != null)}></VilCountChart>
             <hr></hr>
             Thanks for checking out T90 Sudden Death Cup in Stats!
         </Fragment >
