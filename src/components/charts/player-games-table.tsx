@@ -13,6 +13,11 @@ export default function({ games }) {
                 <th>Enemy civ</th>
                 <th>Winner</th>
                 <th>Duration</th>
+                <th>Feudal</th>
+                <th>Castle</th>
+                <th>Imperial</th>
+                <th>Vil count</th>
+                <th>Most created</th>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +40,11 @@ export default function({ games }) {
                         </td>
                         <td>{game.winner ? game.player : game.opponent}</td>
                         <td>{game.str_duration}</td>
+                        <td>{game.feudal_time}</td>
+                        <td>{game.castle_time}</td>
+                        <td>{game.imperial_time}</td>
+                        <td>{game.vil_count}</td>
+                        <td>{game.most_created} ({game.most_created_count})</td>
                     </tr>
                 )
             })}
