@@ -21,7 +21,7 @@ import styles from '../components/charts/base.module.css';
 
 Welcome to the "T90 Sudden Death Cup in Stats" website. This website collects all the statistics you could ever want to know about the tournament in one place!
 
-The data, by default summarizes the entire tournament (as of 2025.12.21). Use the filters on the toolbar to view the data pertaining to a particular map or bracket.
+The data, by default summarizes the entire tournament (as of 2025.12.30). Use the filters on the toolbar to view the data pertaining to a particular map or bracket.
 <!--
 This is a very quick fix to get the build on server to work. This likely kills indexing of the page, so if I care in the future, then fix this properly
 -->
